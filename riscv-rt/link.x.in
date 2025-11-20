@@ -76,6 +76,7 @@ ${INCLUDE_LINKER_FILES}
 
 PROVIDE(_stext = ORIGIN(REGION_TEXT));
 PROVIDE(_stack_start = ORIGIN(REGION_STACK) + LENGTH(REGION_STACK));
+PROVIDE(_stack_end = __estack);
 PROVIDE(_max_hart_id = 0);
 PROVIDE(_hart_stack_size = SIZEOF(.stack) / (_max_hart_id + 1));
 PROVIDE(_heap_size = 0);
@@ -231,6 +232,9 @@ BUG(riscv-rt): .bss is not ${ARCH_WIDTH}-byte aligned");
 
 ASSERT(__sheap % 4 == 0, "
 BUG(riscv-rt): start of .heap is not 4-byte aligned");
+
+ASSERT(_stack_start >= _stack_end, "
+ERROR(riscv-rt): stack end address is not below stack start.");
 
 ASSERT(_pre_init_trap % 4 == 0, "
 BUG(riscv-rt): _pre_init_trap is not 4-byte aligned");
