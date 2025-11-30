@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+- Fix v-trap core interrupt so RISCV_RT_BASE_ISA must be defined
 - Fix stack allocation algorithm for multi-core targets without M extension
 
 ## [v0.16.0] - 2025-09-08

@@ -795,7 +795,7 @@ pub fn exception(args: TokenStream, input: TokenStream) -> TokenStream {
 pub fn core_interrupt(args: TokenStream, input: TokenStream) -> TokenStream {
     let arch = match () {
         #[cfg(feature = "v-trap")]
-        () => RiscvArch::try_from_env(),
+        () => Some(RiscvArch::try_from_env().expect("RISCV_RT_BASE_ISA must be defined")),
         #[cfg(not(feature = "v-trap"))]
         () => None,
     };
